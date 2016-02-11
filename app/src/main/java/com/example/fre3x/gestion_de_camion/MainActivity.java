@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             public void onClick(View view){
                 //appel la fonction envoieMessage avec en parametre le numero du receveur et le message
                 //pour le message je lui donne la longitude et la latitude
-                String message="Bonjour, le camion a été déposée aux coordonnées gps suivantes : longitude = "+longitude+" latitude = "+latitude;
+                String message="0613884724 "+latitude+" "+longitude;
                 new EnvoieMessage("0629764617",message);
 
             }
