@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 //appel la fonction envoieMessage avec en parametre le numero du receveur et le message
                 //pour le message je lui donne la longitude et la latitude
                 String message="0613884724 "+latitude+" "+longitude;
-                new EnvoieMessage("0629764617",message);
+                new EnvoieMessage("0672425178",message);
 
             }
         });
