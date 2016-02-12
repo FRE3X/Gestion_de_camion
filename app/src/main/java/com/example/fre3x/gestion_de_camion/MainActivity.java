@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -39,10 +40,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast=Toast.makeText(context,"Le message a été envoyé",duration);
                 toast.show();
+              }
+            });
 
-
-            }
-        });
     }
 
     protected void onResume() {
