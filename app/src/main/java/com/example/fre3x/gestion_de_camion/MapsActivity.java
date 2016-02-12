@@ -29,14 +29,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private double latitude;
     private double longitude;
+    private double longitudeCamion;
+    private double latitudeCamion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         Intent intent = getIntent();
-         Double longitudeCamion =Double.parseDouble(intent.getStringExtra("longitude"));
-         Double latitudeCamion = Double.parseDouble(intent.getStringExtra("latitude"));
+         longitudeCamion =Double.parseDouble(intent.getStringExtra("longitude"));
+         latitudeCamion = Double.parseDouble(intent.getStringExtra("latitude"));
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -56,6 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        marquer(latitudeCamion,longitudeCamion);
     }
 
     @Override
@@ -72,10 +75,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
                 return;
-            }lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0, this);
+            }
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0, this);
         if (lm.getAllProviders().contains(LocationManager.NETWORK_PROVIDER)) {
             lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000, 0, this);
         }
+
+
 
     }
 
@@ -97,7 +103,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void marquer(Double lat, Double longi) {
         LatLng position = new LatLng(lat,longi);
         //clear point :
-        mMap.clear();
+        //mMap.clear();
 
         mMap.addMarker(new MarkerOptions().position(position).title("Ma position"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
