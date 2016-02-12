@@ -75,11 +75,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000, 0, this);
         }
 
-
-
-
-
-
     }
 
 
@@ -94,6 +89,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
 
 
+    /**
+     * La methode qui permet de placer un marquer sur la postion ou est le camion :
+     **/
+    public void marquer(Double lat, Double longi) {
+        LatLng position = new LatLng(lat,longi);
+        //clear point :
+        mMap.clear();
+
+        mMap.addMarker(new MarkerOptions().position(position).title("Ma position"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
+
+        // zoom :
+        CameraUpdate zoom =CameraUpdateFactory.zoomTo(15);
+        mMap.animateCamera(zoom);
+
+    }
+
 
     @Override
     public void onLocationChanged(Location location) {
@@ -101,6 +113,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         longitude = location.getLongitude();
         /*altitude = location.getAltitude();
         accuracy = location.getAccuracy();*/
+
+        /*
         LatLng sydney = new LatLng(latitude, longitude);
         mMap.clear();
         mMap.addMarker(new MarkerOptions().position(sydney).title("Ma position"));
@@ -110,6 +124,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         CameraUpdate zoom =CameraUpdateFactory.zoomTo(15);
 
         mMap.animateCamera(zoom);
+        */
 
     }
     @Override
