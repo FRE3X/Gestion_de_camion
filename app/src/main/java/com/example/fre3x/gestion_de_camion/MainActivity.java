@@ -32,14 +32,25 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         Button boutonStop = (Button) findViewById(R.id.buttonStop);
         boutonStop.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                //appel la fonction envoieMessage avec en parametre le numero du receveur et le message
-                //pour le message je lui donne la longitude et la latitude
-                String message="coordonnesGps," +" 0613884724, "+longitude+", "+latitude;
-                new EnvoieMessage("0672425178",message);
-                Context context = getApplicationContext();
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast=Toast.makeText(context,"Le message a été envoyé",duration);
-                toast.show();
+                if(longitude==0.0 && latitude==0.0){
+                    //Si la longitude et latitude est egale à zero, on envoie un message d'erreur.
+                    int duration = Toast.LENGTH_SHORT;
+                    Context context = getApplicationContext();
+                    Toast toast=Toast.makeText(context,"Gps non activé, veuillez reessayer avec une connexion internet ou gps active.",duration);
+                    toast.show();
+
+                }else {
+                    //Si c'est bon, on prepare le message à envoyer, et on appel la classe qui va envoyer le message.
+                    //On envoie un toast à l'utilisateur pour lui prevenir que le message est envoyé.
+                    String message="coordonnesGps," +" 0613884724, "+longitude+", "+latitude;
+
+                    new EnvoieMessage("0672425178",message);
+                    int duration = Toast.LENGTH_SHORT;
+                    Context context = getApplicationContext();
+                    Toast toast=Toast.makeText(context,"Le message a été envoyé",duration);
+                    toast.show();
+
+                }
               }
             });
 

@@ -14,9 +14,8 @@ public class MessageReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // TODO: This method is called when the BroadcastReceiver is receiving
-        // an Intent broadcast.
-        //throw new UnsupportedOperationException("Not yet implemented");
+        // Cette méthode est appellé quand le broadcast s'acitve.
+
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             //on recupere
@@ -24,26 +23,24 @@ public class MessageReceiver extends BroadcastReceiver {
             // Enfin, traiter les messages !
             for (SmsMessage smsMessage : msgs) {
                 String from = smsMessage.getOriginatingAddress();
-                // Filtre très basique des SMS sur n° de tel. (Une espèce de liste noire en somme !)
-                if (from.compareTo("+33672425178") == 0) {
-                    String msg = smsMessage.getMessageBody();
-                    //on a recuperer le texte du message
-                    //on va le decouper en plusieurs parties delimite par une virgule
-                    //et la premiere partie doit etre "coordonnes gps"
-                    //si ce n'est pas ca, le sms ne correspond pas
-                    //si oui, on recupere les autre parties, donc le numero, et les coordonnes
-                    String[] separated = msg.split(",");
-                    if(separated[0].equals("coordonnesGps")){
-                        String numero =separated[1].trim();
-                        String longitude = separated[2].trim();
-                        String latitude = separated[3].trim();
-                        //Toast.makeText(context, "Message de " + from + " numero : " + numero + " longitude : " + longitude + " latitude : " + latitude, Toast.LENGTH_LONG).show();
-                       Intent map =new Intent(context, MapsActivity.class);
-                        map.putExtra("longitude",longitude);
-                        map.putExtra("latitude", latitude);
-                        map.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                       context.startActivity(map);
-                    }
+                String msg = smsMessage.getMessageBody();
+                //on a recuperer le texte du message
+                //on va le decouper en plusieurs parties delimite par une virgule
+                //et la premiere partie doit etre "coordonnes gps"
+                //si ce n'est pas ca, le sms ne correspond pas
+                //si oui, on recupere les autre parties, donc le numero, et les coordonnes
+                String[] separated = msg.split(",");
+                if(separated[0].equals("coordonnesGps")){
+                    String numero =separated[1].trim();
+                    String longitude = separated[2].trim();
+                    String latitude = separated[3].trim();
+                    //On va ensuite afficher l'activite qui contient la map en passant les positions et le numéro en paramétre.
+                    Intent map =new Intent(context, MapsActivity.class);
+                    map.putExtra("longitude",longitude);
+                    map.putExtra("latitude", latitude);
+                    map.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(map);
+                }
 
 
                     // Enfin, puisque le SMS concerne que notre application, stopper sa propagation aux autres applications !
@@ -51,8 +48,5 @@ public class MessageReceiver extends BroadcastReceiver {
                 }
             }
         }
-    }
-
-
 }
 

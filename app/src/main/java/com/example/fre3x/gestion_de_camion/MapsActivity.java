@@ -36,6 +36,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        //on recupere les donnes passer en paramétre par le broadcast.
         Intent intent = getIntent();
          longitudeCamion =Double.parseDouble(intent.getStringExtra("longitude"));
          latitudeCamion = Double.parseDouble(intent.getStringExtra("latitude"));
@@ -58,6 +59,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        //On applique le marqueur avec les position reçu par le sms.
         marquer(latitudeCamion,longitudeCamion);
     }
 
