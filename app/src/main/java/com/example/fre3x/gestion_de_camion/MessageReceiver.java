@@ -37,7 +37,12 @@ public class MessageReceiver extends BroadcastReceiver {
                         String numero =separated[1].trim();
                         String longitude = separated[2].trim();
                         String latitude = separated[3].trim();
-                        Toast.makeText(context, "Message de " + from + " numero : " + numero + " longitude : " + longitude + " latitude : " + latitude, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(context, "Message de " + from + " numero : " + numero + " longitude : " + longitude + " latitude : " + latitude, Toast.LENGTH_LONG).show();
+                       Intent map =new Intent(context, MapsActivity.class);
+                        map.putExtra("longitude",longitude);
+                        map.putExtra("latitude", latitude);
+                        map.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                       context.startActivity(map);
                     }
 
 
@@ -47,5 +52,7 @@ public class MessageReceiver extends BroadcastReceiver {
             }
         }
     }
+
+
 }
 
