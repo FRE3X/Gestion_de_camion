@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
     private double latitude;
@@ -27,22 +28,18 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         Button boutonStop = (Button) findViewById(R.id.buttonStop);
         boutonStop.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 //appel la fonction envoieMessage avec en parametre le numero du receveur et le message
                 //pour le message je lui donne la longitude et la latitude
-                String message="0613884724 "+latitude+" "+longitude;
+                String message="coordonnesGps," +" 0613884724, "+longitude+", "+latitude;
                 new EnvoieMessage("0672425178",message);
+                Context context = getApplicationContext();
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast=Toast.makeText(context,"Le message a été envoyé",duration);
+                toast.show();
+
 
             }
         });
